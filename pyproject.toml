@@ -5,12 +5,12 @@ build-backend = "hatchling.build"
 [project]
 name = "automated-document-parser"
 version = "0.1.2"
-description = "A document parser built with LangChain"
-readme = "README.md"
+description = "A powerful and automated document parser built with LangChain for intelligent document processing"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.13"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [
-    { name = "Pulkit Dhingra", email = "your.email@example.com" }
+    { name = "Pulkit Dhingra", email = "pulkit12dhingra@example.com" }
 ]
 keywords = ["langchain", "document-parser", "nlp"]
 classifiers = [

@@ -6,7 +6,7 @@ lint:
 	uv run ruff check . --exclude "*.ipynb"
 
 test:
-	uv run pytest tests/
+	uv run pytest test/
 
 requirements:
 	uv pip compile pyproject.toml --no-reuse-hashes --output-file=requirements.txt
