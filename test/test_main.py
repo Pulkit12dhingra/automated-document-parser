@@ -1,33 +1,24 @@
-"""Sample test file for main module."""
+"""Test main module and package imports."""
 
-import pytest
-
-from automated_document_parser.main import main
+from automated_document_parser import DocumentParser, FileLoader, load_document
 
 
-def test_main_runs_successfully(capsys):
-    """Test that main function runs without errors."""
-    main()
-    captured = capsys.readouterr()
-    assert "Hello from document-parser!" in captured.out
+def test_package_imports():
+    """Test that main package exports are available."""
+    assert DocumentParser is not None
+    assert FileLoader is not None
+    assert load_document is not None
 
 
-def test_main_output_format(capsys):
-    """Test that main function produces expected output format."""
-    main()
-    captured = capsys.readouterr()
-    assert captured.out.strip() == "Hello from document-parser!"
+def test_document_parser_class_available():
+    """Test that DocumentParser class can be instantiated."""
+    parser = DocumentParser()
+    assert parser is not None
 
 
-@pytest.mark.parametrize(
-    "expected_substring",
-    [
-        "Hello",
-        "document-parser",
-    ],
-)
-def test_main_contains_keywords(capsys, expected_substring):
-    """Test that main output contains expected keywords."""
-    main()
-    captured = capsys.readouterr()
-    assert expected_substring in captured.out
+def test_version_attribute():
+    """Test that package has version attribute."""
+    import automated_document_parser
+
+    assert hasattr(automated_document_parser, "__version__")
+    assert isinstance(automated_document_parser.__version__, str)
