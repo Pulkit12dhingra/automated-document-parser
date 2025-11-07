@@ -21,12 +21,25 @@ charset-normalizer==3.4.4
     # via requests
 dataclasses-json==0.6.7
     # via langchain-community
+faiss-cpu==1.12.0
+    # via automated-document-parser (pyproject.toml)
+filelock==3.20.0
+    # via
+    #   huggingface-hub
+    #   torch
+    #   transformers
 frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
+fsspec==2025.10.0
+    # via
+    #   huggingface-hub
+    #   torch
 h11==0.16.0
     # via httpcore
+hf-xet==1.2.0
+    # via huggingface-hub
 httpcore==1.0.9
     # via httpx
 httpx==0.28.1
@@ -35,12 +48,22 @@ httpx==0.28.1
     #   langsmith
 httpx-sse==0.4.3
     # via langchain-community
+huggingface-hub==0.36.0
+    # via
+    #   langchain-huggingface
+    #   sentence-transformers
+    #   tokenizers
+    #   transformers
 idna==3.11
     # via
     #   anyio
     #   httpx
     #   requests
     #   yarl
+jinja2==3.1.6
+    # via torch
+joblib==1.5.2
+    # via scikit-learn
 jsonpatch==1.33
     # via langchain-core
 jsonpointer==3.0.0
@@ -56,12 +79,17 @@ langchain-core==1.0.3
     #   langchain
     #   langchain-classic
     #   langchain-community
+    #   langchain-huggingface
     #   langchain-text-splitters
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
+langchain-huggingface==1.0.1
+    # via automated-document-parser (pyproject.toml)
 langchain-text-splitters==1.0.0
-    # via langchain-classic
+    # via
+    #   automated-document-parser (pyproject.toml)
+    #   langchain-classic
 langgraph==1.0.2
     # via langchain
 langgraph-checkpoint==3.0.1
@@ -79,16 +107,27 @@ langsmith==0.4.41
     #   langchain-core
 lxml==6.0.2
     # via python-docx
+markupsafe==3.0.3
+    # via jinja2
 marshmallow==3.26.1
     # via dataclasses-json
+mpmath==1.3.0
+    # via sympy
 multidict==6.7.0
     # via
     #   aiohttp
     #   yarl
 mypy-extensions==1.1.0
     # via typing-inspect
+networkx==3.5
+    # via torch
 numpy==2.3.4
-    # via langchain-community
+    # via
+    #   faiss-cpu
+    #   langchain-community
+    #   scikit-learn
+    #   scipy
+    #   transformers
 orjson==3.11.4
     # via
     #   langgraph-sdk
@@ -97,9 +136,14 @@ ormsgpack==1.12.0
     # via langgraph-checkpoint
 packaging==25.0
     # via
+    #   faiss-cpu
+    #   huggingface-hub
     #   langchain-core
     #   langsmith
     #   marshmallow
+    #   transformers
+pillow==12.0.0
+    # via sentence-transformers
 propcache==0.4.1
     # via
     #   aiohttp
@@ -126,34 +170,76 @@ python-magic==0.4.27
     # via automated-document-parser (pyproject.toml)
 pyyaml==6.0.3
     # via
+    #   huggingface-hub
     #   langchain-classic
     #   langchain-community
     #   langchain-core
+    #   transformers
+regex==2025.11.3
+    # via transformers
 requests==2.32.5
     # via
+    #   huggingface-hub
     #   langchain-classic
     #   langchain-community
     #   langsmith
     #   requests-toolbelt
+    #   transformers
 requests-toolbelt==1.0.0
     # via langsmith
+safetensors==0.6.2
+    # via transformers
+scikit-learn==1.7.2
+    # via sentence-transformers
+scipy==1.16.3
+    # via
+    #   scikit-learn
+    #   sentence-transformers
+sentence-transformers==5.1.2
+    # via automated-document-parser (pyproject.toml)
+setuptools==80.9.0
+    # via torch
 sniffio==1.3.1
     # via anyio
 sqlalchemy==2.0.44
     # via
     #   langchain-classic
     #   langchain-community
+sympy==1.14.0
+    # via torch
 tenacity==9.1.2
     # via
     #   langchain-community
     #   langchain-core
+threadpoolctl==3.6.0
+    # via scikit-learn
+tokenizers==0.22.1
+    # via
+    #   langchain-huggingface
+    #   transformers
+torch==2.9.0
+    # via
+    #   automated-document-parser (pyproject.toml)
+    #   sentence-transformers
+tqdm==4.67.1
+    # via
+    #   huggingface-hub
+    #   sentence-transformers
+    #   transformers
+transformers==4.57.1
+    # via
+    #   automated-document-parser (pyproject.toml)
+    #   sentence-transformers
 typing-extensions==4.15.0
     # via
+    #   huggingface-hub
     #   langchain-core
     #   pydantic
     #   pydantic-core
     #   python-docx
+    #   sentence-transformers
     #   sqlalchemy
+    #   torch
     #   typing-inspect
     #   typing-inspection
 typing-inspect==0.9.0
