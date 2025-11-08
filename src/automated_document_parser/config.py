@@ -28,10 +28,26 @@ SUPPORTED_EXTENSIONS: List[str] = list(FILE_EXTENSION_MAPPING.keys())
 # Default encoding for text files
 DEFAULT_ENCODING: str = "utf-8"
 
+# PDF loader methods
+PDF_LOADER_METHODS = ["pypdf", "unstructured", "amazon_textract"]
+DEFAULT_PDF_LOADER_METHOD = "pypdf"
+
 # Loader-specific configurations
 LOADER_CONFIG: Dict[str, Dict] = {
     "pdf": {
         "extract_images": False,
+        "default_method": DEFAULT_PDF_LOADER_METHOD,
+        "pypdf": {
+            "extract_images": False,
+        },
+        "unstructured": {
+            "requires_api_key": True,
+            "env_var": "UNSTRUCTURED_API_KEY",
+        },
+        "amazon_textract": {
+            "requires_boto3": True,
+            "default_region": "us-east-2",
+        },
     },
     "csv": {
         "encoding": DEFAULT_ENCODING,

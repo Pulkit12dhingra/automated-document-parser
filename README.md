@@ -11,8 +11,9 @@ A powerful and automated document parser built with LangChain for intelligent do
 
 ## Features
 
-- Automatic file type detection based on file extensions
-- Support for multiple document formats: PDF, TXT, CSV, JSON, DOCX, HTML, Markdown
+- **Automatic file type detection** based on file extensions
+- **Multiple PDF loading methods**: PyPDF, Unstructured, Amazon Textract
+- **Support for multiple document formats**: PDF, TXT, CSV, JSON, DOCX, HTML, Markdown
 - Built on LangChain for seamless integration with RAG applications
 - Type-safe implementation with comprehensive error handling
 - Batch processing support for multiple documents
@@ -58,6 +59,60 @@ for doc in documents:
     print(f"Source: {doc.metadata['source']}")
     print(f"Type: {doc.metadata['file_type']}")
 ```
+
+### Advanced: PDF Loading with Multiple Methods
+
+The library supports three different PDF loading methods:
+
+```python
+from automated_document_parser.loaders import load_pdf
+
+# Method 1: PyPDF (default, fast and simple)
+docs = load_pdf("document.pdf", method="pypdf")
+
+# Method 2: Unstructured (advanced parsing)
+docs = load_pdf("document.pdf", method="unstructured")
+
+# Method 3: Amazon Textract (OCR for scanned documents)
+docs = load_pdf("document.pdf", method="amazon_textract")
+
+# Or use with the unified loader
+from automated_document_parser.loaders import load_document
+docs = load_document("document.pdf", pdf_loader_method="unstructured")
+```
+
+**Installation for optional PDF methods:**
+
+```bash
+# For Unstructured
+pip install "langchain-unstructured[local]"
+export UNSTRUCTURED_API_KEY="your-api-key"
+
+# For Amazon Textract
+pip install boto3 amazon-textract-caller>=0.2.0
+# Configure AWS credentials
+```
+
+### Custom PDF Loaders
+
+You can also provide your own custom PDF loader by inheriting from `BasePDFLoader`:
+
+```python
+from automated_document_parser.loaders.pdf_load import BasePDFLoader, PDFLoader
+
+class MyCustomPDFLoader(BasePDFLoader):
+    def load(self):
+        # Your custom implementation
+        return documents
+    
+    def get_install_command(self):
+        return "pip install my-pdf-package"
+
+# Use your custom loader
+loader = PDFLoader("document.pdf", loader_class=MyCustomPDFLoader)
+docs = loader.load()
+```
+
 ## License
 
 MIT License - see LICENSE file for details.

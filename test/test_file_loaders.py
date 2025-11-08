@@ -137,3 +137,59 @@ class TestLoadDocument:
         """Test load_document with invalid file raises error."""
         with pytest.raises(FileNotFoundError):
             load_document("nonexistent.txt")
+
+
+class TestFileLoaderWithPDFMethods:
+    """Tests for FileLoader with PDF loader method parameter."""
+
+    def test_file_loader_accepts_pdf_loader_method(self):
+        """FileLoader accepts pdf_loader_method parameter."""
+        # This won't actually load since we don't have a real PDF, but should initialize
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            temp_path = f.name
+
+        try:
+            loader = FileLoader(temp_path, pdf_loader_method="pypdf")
+            assert loader.pdf_loader_method == "pypdf"
+            assert loader.file_type == "pdf"
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
+
+    def test_file_loader_default_pdf_method(self):
+        """FileLoader defaults to pypdf for PDFs."""
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            temp_path = f.name
+
+        try:
+            loader = FileLoader(temp_path)
+            assert loader.pdf_loader_method == "pypdf"
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
+
+    def test_file_loader_accepts_pdf_kwargs(self):
+        """FileLoader accepts additional PDF loader kwargs."""
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            temp_path = f.name
+
+        try:
+            loader = FileLoader(
+                temp_path, pdf_loader_method="amazon_textract", region_name="us-west-2"
+            )
+            assert loader.pdf_loader_method == "amazon_textract"
+            assert "region_name" in loader.pdf_loader_kwargs
+            assert loader.pdf_loader_kwargs["region_name"] == "us-west-2"
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
+
+    def test_load_document_accepts_pdf_loader_method(self):
+        """load_document function accepts pdf_loader_method parameter."""
+        with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as f:
+            f.write(b"Test content")
+            temp_path = f.name
+
+        try:
+            # For non-PDF files, the parameter should be accepted but not used
+            documents = load_document(temp_path, pdf_loader_method="pypdf")
+            assert isinstance(documents, list)
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
