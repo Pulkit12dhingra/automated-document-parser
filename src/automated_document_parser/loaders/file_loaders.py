@@ -4,17 +4,17 @@ import logging
 from pathlib import Path
 from typing import List
 
-from langchain_community.document_loaders import (
-    CSVLoader,
-    Docx2txtLoader,
-    JSONLoader,
-    TextLoader,
-    UnstructuredHTMLLoader,
-)
 from langchain_core.documents import Document
 
 from ..config import LOADER_CONFIG
 from ..utils import detect_file_type, validate_file_path
+from .file_load import (
+    CSVFileLoader,
+    DOCXFileLoader,
+    HTMLFileLoader,
+    JSONFileLoader,
+    TextFileLoader,
+)
 from .pdf_load import PDFLoader, PDFLoaderMethod
 
 logger = logging.getLogger(__name__)
@@ -84,8 +84,6 @@ class FileLoader:
         Returns:
             LangChain document loader instance
         """
-        file_str = str(self.file_path)
-
         # Special handling for PDF files with configurable method
         if self.file_type == "pdf":
             return PDFLoader(
@@ -96,15 +94,17 @@ class FileLoader:
 
         # Other file type loaders
         loaders = {
-            "text": lambda: TextLoader(
-                file_str, encoding=LOADER_CONFIG["text"]["encoding"]
+            "text": lambda: TextFileLoader(
+                self.file_path, encoding=LOADER_CONFIG["text"]["encoding"]
             ),
-            "csv": lambda: CSVLoader(
-                file_str, encoding=LOADER_CONFIG["csv"]["encoding"]
+            "csv": lambda: CSVFileLoader(
+                self.file_path, encoding=LOADER_CONFIG["csv"]["encoding"]
             ),
-            "json": lambda: JSONLoader(file_str, jq_schema=".", text_content=False),
-            "docx": lambda: Docx2txtLoader(file_str),
-            "html": lambda: UnstructuredHTMLLoader(file_str),
+            "json": lambda: JSONFileLoader(
+                self.file_path, jq_schema=".", text_content=False
+            ),
+            "docx": lambda: DOCXFileLoader(self.file_path),
+            "html": lambda: HTMLFileLoader(self.file_path),
         }
 
         if self.file_type not in loaders:
