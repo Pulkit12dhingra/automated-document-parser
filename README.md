@@ -4,8 +4,13 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/automated-document-parser.svg)](https://pypi.org/project/automated-document-parser/)
 [![CI](https://github.com/Pulkit12dhingra/automated-document-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/Pulkit12dhingra/automated-document-parser/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/Pulkit12dhingra/automated-document-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/Pulkit12dhingra/automated-document-parser)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=YOUR_PROJECT&metric=security_rating)](https://sonarcloud.io/dashboard?id=YOUR_PROJECT)
+[![GitHub issues](https://img.shields.io/github/issues/Pulkit12dhingra/automated-document-parser)](https://github.com/Pulkit12dhingra/automated-document-parser/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/Pulkit12dhingra/automated-document-parser)](https://github.com/Pulkit12dhingra/automated-document-parser/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+
+
 
 A powerful and automated document parser built with LangChain for intelligent document processing. This library automatically detects file types and uses the appropriate loader to parse documents into LangChain-compatible formats.
 
