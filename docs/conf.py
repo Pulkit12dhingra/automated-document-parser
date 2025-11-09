@@ -67,6 +67,8 @@ html_theme_options = {
     "sticky_navigation": True,
     "includehidden": True,
     "titles_only": False,
+    "analytics_id": "G-WZB7HSD0PP",  # Replace with your Google Analytics 4 measurement ID
+    "analytics_anonymize_ip": False,
 }
 
 # -- Options for autodoc -----------------------------------------------------
